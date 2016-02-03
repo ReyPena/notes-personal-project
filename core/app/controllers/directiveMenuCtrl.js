@@ -1,7 +1,7 @@
-angular.module("notes").controller("menuCtrl", function ($scope, menuService, tokenFatory) {
+angular.module("notes").controller("menuCtrl", function ($scope, menuService, tokenFactory) {
   $scope.notlog = true;
   $scope.logout = function () {
-    tokenFatory.setToken();
+    tokenFactory.clearToken();
     menuService.logout();
   };
 });

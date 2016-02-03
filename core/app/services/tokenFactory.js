@@ -1,4 +1,4 @@
-angular.module("notes").factory("tokenFatory", function ($window) {
+angular.module("notes").factory("tokenFactory", function ($window) {
   var store = $window.localStorage;
   var key = "auth-token";
   return{
@@ -6,7 +6,7 @@ angular.module("notes").factory("tokenFatory", function ($window) {
     setToken: setToken,
     clearToken: clearToken
   };
-  function getToken(key) {
+  function getToken() {
     return store.getItem(key);
   }
   function setToken(token) {
@@ -21,13 +21,12 @@ angular.module("notes").factory("tokenFatory", function ($window) {
   }
 });
 
-angular.module("notes").factory("tokenInterceptor", function (tokenFatory) {
-  console.log("test");
+angular.module("notes").factory("tokenInterceptor", function (tokenFactory) {
   return{
-    request: addToken
+    'request': addToken
   };
   function addToken(config) {
-    var token = tokenFatory.getToken();
+    var token = tokenFactory.getToken();
     if (token) {
       config.headers = config.headers || {};
       config.headers.Authorization = "bearer " + token;
