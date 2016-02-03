@@ -32,4 +32,5 @@ User.methods.verifyPassword = function (reqBodyPassword) {
   return bcrypt.compareSync(reqBodyPassword, user.password);
 };
 
+
 module.exports = mongoose.model("User", User);

@@ -3,11 +3,10 @@ var express = require("express")
   , cors = require("cors")
   , bodyParser = require("body-parser")
   , mongoose = require("mongoose")
-  , jwt = require("jsonwebtoken")
   , mongoUri = "mongodb://localhost:27017/notes"
   , app = express()
   , passport = require("./service/passport")
-  , port = 8080;
+  , port = process.env.PORT || 8080;
 
 // this are the controlleres files
 
@@ -24,10 +23,20 @@ app.use(bodyParser.json());
 app.use(cors());
 
 ///////////////
+//Local Auth///
+///////////////
+app.post("/auth/local", passport.authenticate("local", {
+  successRedirect: '/api/user'
+}));
+app.get("/auth/login/currentUser", localAuthCtrl.currentUser);
+app.get("/auth/logout", localAuthCtrl.logout);
+// jwt token
+
+///////////////
 //User/////////
 ///////////////
 app.post("/api/user", userCtrl.createUser);
-app.get("/api/user", userCtrl.getUser);
+app.get("/api/user/", userCtrl.getUser);
 app.put("/api/user", userCtrl.updateUser);
 app.delete("/api/user", userCtrl.deleteUser);
 
@@ -47,16 +56,9 @@ app.get("/api/note", noteCtrl.getNote);
 app.put("/api/note", noteCtrl.updateNote);
 app.delete("/api/note", noteCtrl.deleteNote);
 
-///////////////
-//Local Auth///
-///////////////
-app.post("/auth/local", passport.authenticate("local", {
-  successRedirect: '/api/user'
-}));
-app.get("/auth/login/currentUser", localAuthCtrl.currentUser);
-app.get("/auth/logout", localAuthCtrl.logout);
-// token
-app.set('superSecret', localAuthCtrl.secret);
+
+
+
 
 
 mongoose.connect(mongoUri);

@@ -16,9 +16,12 @@ passport.use(new LocalStrategy({
       return done(null, false);
     }
     if(user.verifyPassword(password)){
-      var token = jwt.sign(user, app.get('superSecret'), {
-        expiresInMinutes: 1440 // expires in 24 hours
-      });
+
+      // res.json({
+      //     success: true,
+      //     message: 'Enjoy your token!',
+      //     token: token
+      // });
       return done(null, user);
     } else{
       return done(null, false);

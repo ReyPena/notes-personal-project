@@ -1,4 +1,6 @@
-var User = require("../models/userModel");
+var User = require("../models/userModel")
+  , jwt = require("jsonwebtoken")
+  , jwtSecret = "0a0a0a0a0a0a0a";
 
 module.exports = {
   createUser: function (req, res, next) {
@@ -16,7 +18,14 @@ module.exports = {
       if(err){
         return res.status(500).send(err);
       }
-      res.send(user);
+      var token = jwt.sign({
+        id: req.user.id,
+        email: req.user.email,
+        password: req.user.password
+      }, jwtSecret);
+      res.send({
+        token: token,
+        user: req.user});
     });
   },
   // getAllUsers: function (req, res, next) {
