@@ -1,0 +1,21 @@
+{
+  "name": "notes",
+  "description": "Note book, and code snipped.",
+  "main": "core/server/serer.js",
+  "authors": [
+    "rey"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "angular": "~1.4.9",
+    "jquery": "~2.2.0",
+    "angular-ui-router": "~0.2.17"
+  }
+}
