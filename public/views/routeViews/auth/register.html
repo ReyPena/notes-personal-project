@@ -36,7 +36,7 @@
 
           <div class="form-group">
             <div class="col-lg-8 col-lg-offset-2">
-              <input class="form-control" placeholder="Re-enter Password" type="password" ng-model="$scope.passConfirmation">
+              <input class="form-control" placeholder="Re-enter Password" type="password" ng-model="passConfirmation">
             </div>
           </div>
 
@@ -71,7 +71,7 @@
         </fieldset>
       </form>
     </div>
-    <div class="alert alert-dismissible alert-danger text-center" ng-hide="wrongPass">
+    <div class="alert alert-dismissible alert-danger text-center" ng-if="!wrongPass">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
       <br>
       <h4>Wrong password</h4>

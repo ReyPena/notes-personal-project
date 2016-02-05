@@ -14,7 +14,16 @@ angular.module("notes").config(function ($stateProvider, $urlRouterProvider) {
     })
     .state("profile", {
       url: "/profile",
-      templateUrl: "../views/routeViews/profile/profile.html"
+      templateUrl: "../views/routeViews/profile/profile.html",
+      resolve: {
+        token: function (tokenFactory, $state) {
+          var token = tokenFactory.getToken();
+          console.log(token);
+          if (!token) {
+            $state.go("home");
+          }
+        }
+      }
     })
     .state("books", {
       url: "/books",
@@ -24,13 +33,13 @@ angular.module("notes").config(function ($stateProvider, $urlRouterProvider) {
       url: "/book/:id",
       templateUrl: "../views/routeViews/book/book.html"
     })
-    .state("notes", {
-      url: "/notes",
-      templateUrl: "../views/routeViews/notes/notes.html"
-    })
     .state("note", {
       url: "/note/:id",
       templateUrl: "../views/routeViews/note/note.html"
+    })
+    .state("editor", {
+      url: "/editor",
+      templateUrl: "../views/routeViews/editor/editor.html"
     });
 
   $urlRouterProvider

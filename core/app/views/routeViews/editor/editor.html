@@ -1,0 +1,142 @@
+<div class="row">
+  <div class="col-sm-3">
+    <div class="well bs-sidebar affix" id="sidebar">
+      <ul class="nav pills nav-stacked">
+        <li><a>
+            Add Snippet <span class="label label-primary"><i class="zmdi zmdi-code"></i></span></a></li>
+        <li><a>
+          Add For Text <span class="label label-primary"><i class="zmdi zmdi-edit"></i></span></a></li>
+      </ul>
+    </div>
+    <!--well bs-sidebar affix-->
+  </div>
+  <!--col-sm-3-->
+</div>
+
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+
+        <form class="form-horizontal" ng-submit="register(User)">
+          <div class="form-group">
+            <label for="noteName" class="col-lg-1 control-label">
+              <i class="zmdi zmdi-book zmdi-hc-2x"></i>
+            </label>
+            <div class="col-lg-4">
+              <input class="form-control" id="noteName" placeholder="Note Name" type="text">
+            </div>
+
+            <label for="tags" class="col-lg-1 control-label">
+              <i class="zmdi zmdi-star zmdi-hc-2x"></i>
+            </label>
+            <div class="col-lg-4">
+              <input class="form-control" id="tags" placeholder="Tags you want a add ..." type="text">
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <textarea class="form-control" rows="50" id="textContent"></textarea>
+            <textarea class="form-control" rows="50" id="codeContent"></textarea>
+
+          </div>
+        </form>
+
+        <br>
+      </div>
+      <div class="list-group">
+        <div href="#" class="list-group-item text-right">
+          <button type="button" class="btn btn-danger">Delete</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    var syn = "seti";
+
+    $("#codeContent").summernote({
+      height: 400,
+      tabsize: 2,
+      // toolbar: [],
+      codemirror: {
+        theme: syn,
+        lineNumbers: true
+      },
+      callbacks: {
+        onInit: function() {
+          $(".btn-codeview").click();
+          $(".btn-codeview").hide();
+        }
+      }
+    });
+
+    $("#textContent").summernote({
+      height: 400,
+      tabsize: 2,
+      toolbar: [
+        ["style", ["style"]],
+        ["font", ["bold", "italic", "underline", "clear"]],
+        ["fontname", ["fontname"]],
+        ["color", ["color"]],
+        ["para", ["ul", "ol", "paragraph"]],
+        ["height", ["height"]],
+        ["table", ["table"]],
+        ["insert", ["link", "hr"]],
+        ["view", ["fullscreen", "codeview"]],
+      ],
+      codemirror: {
+        lineNumbers: true,
+        theme: syn
+      },
+    });
+
+  //   callbacks: {
+  //     onInit: function() {
+  //       // Add "open" - "save" buttons
+  //       var dracula = "<button id="dracula" type="button" class="btn btn-default btn-sm btn-small" title="Select Theme" tabindex="-1">Dracula</button>";
+  //
+  //       var fileGroup = "<div class="note-file btn-group">" + dracula + "</div>";
+  //       $(fileGroup).appendTo($(".note-toolbar"));
+  //
+  //       var fileGroup = "<div class="note-file btn-group">" + seti + "</div>";
+  //       $(fileGroup).appendTo($(".note-toolbar"));
+  //
+  //       var seti = "<button id="seti" type="button" class="btn btn-default btn-sm btn-small" title="Select Theme" tabindex="-1">Dracula</button>";
+  //
+  //       var solarized = "<button id="solarized" type="button" class="btn btn-default btn-sm btn-small" title="Select Theme" tabindex="-1">Dracula</button>";
+  //
+  //       var fileGroup = "<div class="note-file btn-group">" + solarized + "</div>";
+  //       $(fileGroup).appendTo($(".note-toolbar"));
+  //
+  //       // Button tooltips
+  //       $("#dracula").tooltip({
+  //         container: "body",
+  //         placement: "bottom"
+  //       });
+  //       $("#seti").tooltip({
+  //         container: "body",
+  //         placement: "bottom"
+  //       });
+  //       $("#solarized").tooltip({
+  //         container: "body",
+  //         placement: "bottom"
+  //       });
+  //       // Button events
+  //       $("#dracula").click(function() {
+  //         return syn = "dracula";
+  //       });
+  //       $("#seti").click(function() {
+  //         return syn = "seti";
+  //       });
+  //       $("#solarized").click(function() {
+  //         return syn = "solarized";
+  //       });
+  //     }
+  //   } //this the end of callbacks
+
+  });
+</script>

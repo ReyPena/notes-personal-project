@@ -15,10 +15,13 @@ var paths = {
   // js libraries
   jsLibs: [
     // this are the libraries
-    "./bower_components/jquery/dist/jquery.min.js",
+    "./bower_components/jquery/dist/jquery.js",
     "./bower_components/angular/angular.min.js",
     "./bower_components/angular-ui-router/release/angular-ui-router.min.js",
-    // "./bower_components/Materialize/dist/js/materialize.min.js",
+    // this is for css libs and such
+    "./bower_components/codemirror/lib/codemirror.js",
+    "./bower_components/codemirror/mode/xml/xml.js",
+    "./bower_components/summernote/dist/summernote.js",
     // this is my own js
     "./core/app/app.js",
     "./core/app/**/*.js"
@@ -26,9 +29,13 @@ var paths = {
   // css libraries
   cssLibs: [
     // this is my external css
-    // "./bower_components/Materialize/dist/css/materialize.min.css",
+    "./bower_components/summernote/dist/summernote.css",
+    "./bower_components/codemirror/theme/*.css",
+    "./bower_components/codemirror/lib/codemirror.css",
     // this is my own css
-    "./core/client/app/**/*.css"
+    "./core/client/app/**/*.css",
+    "./public/assets/style/css/paperTheme.css",
+    "./public/assets/style/css/myStyle.css"
   ]
 };
 
@@ -44,15 +51,15 @@ gulp.task("copyViews", ["clean"], function(){
 gulp.task("styles", function () {
   gulp.src(paths.cssLibs)
     .pipe(uglifyCss())
-    .pipe(concat("styles.css"))
-    .pipe(gulp.dest("./public/assets/css"));
+    .pipe(concat("mainStyle.css"))
+    .pipe(gulp.dest("./public/assets/style"));
 });
 
 gulp.task("scripts", function () {
   gulp.src(paths.jsLibs)
     .pipe(ngAnnotate())
     .pipe(concat("mainScripts.js"))
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(gulp.dest("./public/scripts"));
 });
 
