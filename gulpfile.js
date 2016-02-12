@@ -21,7 +21,11 @@ var paths = {
     // this is for css libs and such
     "./bower_components/codemirror/lib/codemirror.js",
     "./bower_components/codemirror/mode/xml/xml.js",
+    "./bower_components/codemirror/mode/javascript/javascript.js",
+    "./bower_components/codemirror/mode/css/css.js",
+    "./bower_components/angular-ui-codemirror/ui-codemirror.js",
     "./bower_components/summernote/dist/summernote.js",
+    "./bower_components/angular-summernote/src/angular-summernote.js",
     // this is my own js
     "./core/app/app.js",
     "./core/app/**/*.js"

@@ -15,22 +15,22 @@ angular.module("notes").config(function ($stateProvider, $urlRouterProvider) {
     .state("profile", {
       url: "/profile",
       templateUrl: "../views/routeViews/profile/profile.html",
-      resolve: {
-        token: function (tokenFactory, $state) {
-          var token = tokenFactory.getToken();
-          console.log(token);
-          if (!token) {
-            $state.go("home");
-          }
-        }
-      }
+      // resolve: {
+      //   token: function (tokenFactory, $state) {
+      //     var token = tokenFactory.getToken();
+      //     console.log(token);
+      //     if (!token) {
+      //       $state.go("home");
+      //     }
+      //   }
+      // }
     })
     .state("books", {
       url: "/books",
       templateUrl: "../views/routeViews/books/books.html"
     })
     .state("book", {
-      url: "/book/:id",
+      url: "/book",
       templateUrl: "../views/routeViews/book/book.html"
     })
     .state("note", {

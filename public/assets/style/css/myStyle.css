@@ -1,3 +1,9 @@
-.btn, .navbar, .nav-pills{
+.btn, .navbar, .nav-pills, .label, .thumbnail{
   border-radius: 0;
 }
+.btn{
+  box-shadow: none;
+}
+/*li :hover{
+  text-decoration: none;
+}*/
