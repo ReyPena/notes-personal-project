@@ -2,8 +2,8 @@ var mongoose = require("mongoose");
 
 var Note = new mongoose.Schema({
   noteName: {type: String},
-  Tag: {type: String},
-  content: {type: String},
+  noteTags: {type: String},
+  content: {type: Array},
   noteDate: {type: Date, default: Date.now}
 });
 

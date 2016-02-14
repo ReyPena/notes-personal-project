@@ -5,7 +5,7 @@ angular.module("notes").service("registerService", function ($http, $state) {
       url: "/api/user",
       data: registerInfo
     }).then(function (result) {
-      console.log("register return", result);
+      // console.log("register return", result);
       $state.go("profile");
     });
   };

@@ -3,11 +3,11 @@ var note = require("../models/notesModel");
 module.exports = {
   createNote: function (req, res, next) {
     console.log("here created", req.body);
-    new User( req.body ).save(function( err, note ) {
+    new note( req.body ).save(function( err, note ) {
 			if (err) {
 				res.status(500).send( err );
 			} else {
-				res.send( note );
+				res.send(note);
 			}
 		});
   },

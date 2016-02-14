@@ -1,4 +1,4 @@
-angular.module("notes").controller("editorCtrl", function($scope) {
+angular.module("notes").controller("editorCtrl", function($scope, editorService) {
   var codeTheme = "seti";
 
   $scope.textEdit = {
@@ -29,19 +29,11 @@ angular.module("notes").controller("editorCtrl", function($scope) {
     var codeTheme = "rubyblue";
   };
 
-  $scope.note = {
-    noteName: "",
-    noteTag: "",
-    noteArea: [{
-      index: 0,
-      noteType: "",
-      noteText: ""
-    }]
-  };
 
   $scope.editors = [];
+  $scope.note = {};
+  $scope.note.content = $scope.editors;
 
-  $scope.foo = "im foo";
 
   // this add/remove new text areas
   $scope.addNewHtml = function() {
@@ -66,6 +58,12 @@ angular.module("notes").controller("editorCtrl", function($scope) {
   };
   $scope.deleteArea = function($index) {
     $scope.editors.splice($index, 1);
+  };
+
+
+  // here is the wire to the server
+  $scope.saveNote = function (note) {
+    editorService.createNote(note);
   };
 
 });
