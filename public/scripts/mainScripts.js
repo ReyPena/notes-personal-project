@@ -28254,6 +28254,17 @@ angular.module("notes", ["ui.router", "summernote", "ui.codemirror"], ["$httpPro
   $httpProvider.interceptors.push("tokenInterceptor");
 }]);
 
+angular.module("notes").controller("bookCtrl", ["$scope", "$stateParams", function ($scope, $stateParams) {
+  $stateParams.id
+}]);
+
+angular.module("notes").controller("booksCtrl", ["$scope", function ($scope) {
+  
+  $scope.deleteBook = function($index) {
+    $scope.editors.splice($index, 1);
+  };
+}]);
+
 angular.module("notes").controller("menuCtrl", ["$scope", "menuService", "tokenFactory", function ($scope, menuService, tokenFactory) {
   $scope.notlog = true;
   $scope.logout = function () {
@@ -28337,6 +28348,10 @@ angular.module("notes").controller("loginCtrl", ["$scope", "loginService", funct
     // console.log(user);
     loginService.login(user);
   };
+}]);
+
+angular.module("notes").controller("noteCtrl", ["$scope", "$stateParams", "noteService", function ($scope, $stateParams, noteService) {
+  $stateParams.id
 }]);
 
 
@@ -28425,11 +28440,13 @@ angular.module("notes").config(["$stateProvider", "$urlRouterProvider", function
     })
     .state("login", {
       url: "/login",
-      templateUrl: "../views/routeViews/auth/login.html"
+      templateUrl: "../views/routeViews/auth/login.html",
+      controller: "loginCtrl"
     })
     .state("register", {
       url: "/register",
-      templateUrl: "../views/routeViews/auth/register.html"
+      templateUrl: "../views/routeViews/auth/register.html",
+      controller: "registerCtrl"
     })
     .state("profile", {
       url: "/profile",
@@ -28450,20 +28467,25 @@ angular.module("notes").config(["$stateProvider", "$urlRouterProvider", function
     })
     .state("book", {
       url: "/book",
-      templateUrl: "../views/routeViews/book/book.html"
+      templateUrl: "../views/routeViews/book/book.html",
+      controller: "bookCtrl"
     })
     .state("note", {
       url: "/note/:id",
-      templateUrl: "../views/routeViews/note/note.html"
+      templateUrl: "../views/routeViews/note/note.html",
+      controller: "noteCtrl"
     })
     .state("editor", {
       url: "/editor",
-      templateUrl: "../views/routeViews/editor/editor.html"
+      templateUrl: "../views/routeViews/editor/editor.html",
+      controller: "editorCtrl"
     });
 
   $urlRouterProvider
     .otherwise("/home");
 }]);
+
+
 
 angular.module("notes").service("menuService", ["$http", function ($http) {
   this.logout =  function () {
@@ -28485,6 +28507,7 @@ angular.module("notes").service("editorService", ["$http", "$state", function ($
       data: note
     }).then(function (result) {
       console.log("note created");
+      
     });
   };
 }]);
@@ -28500,6 +28523,28 @@ angular.module("notes").service("loginService", ["$http", "$state", "tokenFactor
       $state.go("profile");
     });
   };
+}]);
+
+angular.module("notes").service("noteService", ["$http", function ($http) {
+  this.showNote = function (note){
+    return $http({
+      method: "GET",
+      url: "/api/note",
+      data: note
+    }).then(function (result) {
+      console.log("note created");
+    });
+  };
+  this.Note = function (note){
+    return $http({
+      method: "DELETE",
+      url: "/api/note",
+      data: note
+    }).then(function (result) {
+      console.log("note created");
+    });
+  };
+
 }]);
 
 angular.module("notes").service("registerService", ["$http", "$state", function ($http, $state) {

@@ -1,85 +1,83 @@
-<div ng-controller="editorCtrl">
-
-  <div class="row">
-    <div class="col-sm-3">
-      <div class="well bs-sidebar affix" id="sidebar">
-        <ul class="nav nav-pills nav-stacked">
-          <li>
-            <a data-toggle="collapse" data-target="#snippetType">
-              <span class="label label-primary"><i class="zmdi zmdi-code"></i></span> Add Snippet</a>
-          </li>
-          <ul class="collapse" id="snippetType">
-            <li><a ng-click="addNewHtml()">HTML</a></li>
-            <li><a ng-click="addNewCss()">CSS</a></li>
-            <li><a ng-click="addNewJS()">JS</a></li>
-          </ul>
-          <li>
-            <a ng-click="addNewText()">
-              <span class="label label-primary"><i class="zmdi zmdi-edit"></i></span> Add Text</a>
-          </li>
-          <li>
-            <a data-toggle="collapse" data-target="#themeMenu">
-              <span class="label label-primary"><i class="zmdi zmdi-sun"></i></span> Theme
-              <ul class="collapse" id="themeMenu">
-                <li><a ng-click="themeSeti()">Seti</a></li>
-                <li><a ng-click="themeMonokai()">Monokai</a></li>
-                <li><a ng-click="themeRubyblue()">Ruby-Blue</a></li>
-              </ul>
-            </a>
-          </li>
+<div class="row">
+  <div class="col-sm-3">
+    <div class="well bs-sidebar affix" id="sidebar">
+      <ul class="nav nav-pills nav-stacked">
+        <li>
+          <a data-toggle="collapse" data-target="#snippetType">
+            <span class="label label-primary"><i class="zmdi zmdi-code"></i></span> Add Snippet</a>
+        </li>
+        <ul class="collapse" id="snippetType">
+          <li><a ng-click="addNewHtml()">HTML</a></li>
+          <li><a ng-click="addNewCss()">CSS</a></li>
+          <li><a ng-click="addNewJS()">JS</a></li>
         </ul>
-      </div>
-      <!--well bs-sidebar affix-->
+        <li>
+          <a ng-click="addNewText()">
+            <span class="label label-primary"><i class="zmdi zmdi-edit"></i></span> Add Text</a>
+        </li>
+        <li>
+          <a data-toggle="collapse" data-target="#themeMenu">
+            <span class="label label-primary"><i class="zmdi zmdi-sun"></i></span> Theme
+            <ul class="collapse" id="themeMenu">
+              <li><a ng-click="themeSeti()">Seti</a></li>
+              <li><a ng-click="themeMonokai()">Monokai</a></li>
+              <li><a ng-click="themeRubyblue()">Ruby-Blue</a></li>
+            </ul>
+          </a>
+        </li>
+      </ul>
     </div>
-    <!--col-sm-3-->
+    <!--well bs-sidebar affix-->
   </div>
+  <!--col-sm-3-->
+</div>
 
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
 
-          <form class="form-horizontal">
-            <div class="form-group">
-              <label for="noteName" class="col-lg-1 control-label">
-                <i class="zmdi zmdi-book zmdi-hc-2x"></i>
-              </label>
-              <div class="col-lg-4">
-                <input class="form-control" id="noteName" placeholder="Note Name" type="text" ng-model="note.noteName">
-              </div>
-
-              <label for="tags" class="col-lg-1 control-label">
-                <i class="zmdi zmdi-tag zmdi-hc-2x"></i>
-              </label>
-              <div class="col-lg-4">
-                <input class="form-control" id="tags" placeholder="Tag Something" type="text" ng-model="note.noteTags">
-              </div>
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label for="noteName" class="col-lg-1 control-label">
+              <i class="zmdi zmdi-book zmdi-hc-2x"></i>
+            </label>
+            <div class="col-lg-4">
+              <input class="form-control" id="noteName" placeholder="Note Name" type="text" ng-model="note.noteName">
             </div>
-            <div class="col-lg-12">
-              {{note}}
 
-              <div ng-repeat="editor in editors">
-                <button type="button" class="close" data-dismiss="alert" ng-click="deleteArea($index)">&times;</button>
-                <h5>{{editor.language}}</h5>
-                <br>
-                <text-edit-directive ng-if="editor.language=='text'" ng-model="editor.text"></text-edit-directive>
-                <code-edit-directive ng-if="editor.language!='text'" language="editor.language" ng-model="$parent.editor.text"></code-edit-directive>
-              </div>
-
+            <label for="tags" class="col-lg-1 control-label">
+              <i class="zmdi zmdi-tag zmdi-hc-2x"></i>
+            </label>
+            <div class="col-lg-4">
+              <input class="form-control" id="tags" placeholder="Tag Something" type="text" ng-model="note.noteTags">
             </div>
-          </form>
-
-          <br>
-        </div>
-        <div class="list-group">
-          <div href="#" class="list-group-item text-right">
-            <button type="button" class="btn">Delete</button>
-            <button type="submit" class="btn btn-primary" ng-click="saveNote(note)">Save changes</button>
           </div>
+          <div class="col-lg-12">
+            {{note}}
+
+            <div ng-repeat="editor in editors">
+              <button type="button" class="close" data-dismiss="alert" ng-click="deleteArea($index)">&times;</button>
+              <h5>{{editor.language}}</h5>
+              <br>
+              <text-edit-directive ng-if="editor.language=='text'" ng-model="editor.text"></text-edit-directive>
+              <code-edit-directive ng-if="editor.language!='text'" language="editor.language" ng-model="$parent.editor.text"></code-edit-directive>
+            </div>
+
+          </div>
+        </form>
+
+        <br>
+      </div>
+      <div class="list-group">
+        <div href="#" class="list-group-item text-right">
+          <button type="button" class="btn">Delete</button>
+          <button type="submit" class="btn btn-primary" ng-click="saveNote(note)">Save changes</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 <!--this is the big contianer -->

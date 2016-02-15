@@ -7,6 +7,7 @@ angular.module("notes").service("editorService", function ($http, $state) {
       data: note
     }).then(function (result) {
       console.log("note created");
+      
     });
   };
 });

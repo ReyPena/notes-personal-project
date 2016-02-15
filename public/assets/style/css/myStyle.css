@@ -1,9 +1,23 @@
-.btn, .navbar, .nav-pills, .label, .thumbnail{
+.btn, .navbar, .nav-pills, .label, .thumbnail {
   border-radius: 0;
 }
-.btn{
+.btn {
   box-shadow: none;
 }
+
 /*li :hover{
   text-decoration: none;
 }*/
+
+.darkBlueContainer {
+  background-color: #16539D;
+}
+.transparentContainer {
+  background-color: transparent;
+  border: none;
+}
+.whiteText{
+  color: #ffffff;
+}
+
+/*.darkBlueContainer {}*/

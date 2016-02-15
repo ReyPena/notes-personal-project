@@ -6,11 +6,13 @@ angular.module("notes").config(function ($stateProvider, $urlRouterProvider) {
     })
     .state("login", {
       url: "/login",
-      templateUrl: "../views/routeViews/auth/login.html"
+      templateUrl: "../views/routeViews/auth/login.html",
+      controller: "loginCtrl"
     })
     .state("register", {
       url: "/register",
-      templateUrl: "../views/routeViews/auth/register.html"
+      templateUrl: "../views/routeViews/auth/register.html",
+      controller: "registerCtrl"
     })
     .state("profile", {
       url: "/profile",
@@ -31,15 +33,18 @@ angular.module("notes").config(function ($stateProvider, $urlRouterProvider) {
     })
     .state("book", {
       url: "/book",
-      templateUrl: "../views/routeViews/book/book.html"
+      templateUrl: "../views/routeViews/book/book.html",
+      controller: "bookCtrl"
     })
     .state("note", {
       url: "/note/:id",
-      templateUrl: "../views/routeViews/note/note.html"
+      templateUrl: "../views/routeViews/note/note.html",
+      controller: "noteCtrl"
     })
     .state("editor", {
       url: "/editor",
-      templateUrl: "../views/routeViews/editor/editor.html"
+      templateUrl: "../views/routeViews/editor/editor.html",
+      controller: "editorCtrl"
     });
 
   $urlRouterProvider
