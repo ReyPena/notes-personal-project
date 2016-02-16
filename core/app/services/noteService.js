@@ -3,18 +3,16 @@ angular.module("notes").service("noteService", function ($http) {
     return $http({
       method: "GET",
       url: "/api/note",
-      data: note
     }).then(function (result) {
       console.log("note created");
     });
   };
-  this.Note = function (note){
+  this.getNote = function (id){
     return $http({
-      method: "DELETE",
-      url: "/api/note",
-      data: note
+      method: "GET",
+      url: "/api/note?_id=" + id,
     }).then(function (result) {
-      console.log("note created");
+      return result.data[0];
     });
   };
 

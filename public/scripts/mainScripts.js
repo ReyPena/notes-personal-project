@@ -28254,15 +28254,44 @@ angular.module("notes", ["ui.router", "summernote", "ui.codemirror"], ["$httpPro
   $httpProvider.interceptors.push("tokenInterceptor");
 }]);
 
-angular.module("notes").controller("bookCtrl", ["$scope", "$stateParams", function ($scope, $stateParams) {
-  $stateParams.id
+angular.module("notes").controller("bookCtrl", ["$scope", "$stateParams", "bookService", function ($scope, $stateParams, bookService) {
+  $scope.deleteBook = function() {
+
+  };
+
+  bookService.getBook($stateParams.id).then(function (response) {
+      $scope.book = response;
+    }
+  );
+
+  $scope.getAllNotes = function () {
+    bookService.getNotes().then(function (response) {
+      $scope.notes = response;
+    });
+  };
+
+  $scope.getAllNotes();
 }]);
 
-angular.module("notes").controller("booksCtrl", ["$scope", function ($scope) {
-  
+angular.module("notes").controller("booksCtrl", ["$scope", "booksService", function ($scope, booksService) {
+
   $scope.deleteBook = function($index) {
-    $scope.editors.splice($index, 1);
+
   };
+
+  $scope.getAllBooks = function () {
+    booksService.getBooks().then(function (response) {
+      $scope.books = response;
+    });
+  };
+
+  $scope.saveBook = function (book) {
+    booksService.createBook(book);
+    $scope.getAllBooks();
+  };
+
+  $scope.getAllBooks();
+
 }]);
 
 angular.module("notes").controller("menuCtrl", ["$scope", "menuService", "tokenFactory", function ($scope, menuService, tokenFactory) {
@@ -28351,7 +28380,10 @@ angular.module("notes").controller("loginCtrl", ["$scope", "loginService", funct
 }]);
 
 angular.module("notes").controller("noteCtrl", ["$scope", "$stateParams", "noteService", function ($scope, $stateParams, noteService) {
-  $stateParams.id
+  noteService.getNote($stateParams.id).then(function (response) {
+      $scope.note = response;
+    }
+  );
 }]);
 
 
@@ -28463,10 +28495,11 @@ angular.module("notes").config(["$stateProvider", "$urlRouterProvider", function
     })
     .state("books", {
       url: "/books",
-      templateUrl: "../views/routeViews/books/books.html"
+      templateUrl: "../views/routeViews/books/books.html",
+      controller: "booksCtrl"
     })
     .state("book", {
-      url: "/book",
+      url: "/book/:id",
       templateUrl: "../views/routeViews/book/book.html",
       controller: "bookCtrl"
     })
@@ -28485,7 +28518,68 @@ angular.module("notes").config(["$stateProvider", "$urlRouterProvider", function
     .otherwise("/home");
 }]);
 
+angular.module("notes").service("bookService", ["$http", function ($http) {
 
+  this.getBook = function(id) {
+    return $http({
+      method: "GET",
+      url: "/api/book?_id=" + id,
+    }).then(function(book) {
+      return book.data[0];
+    });
+  };
+
+  this.getNotes = function() {
+    return $http({
+      method: "GET",
+      url: "/api/note",
+    }).then(function(notes) {
+      return notes.data;
+    });
+  };
+
+  this.getNote = function(id) {
+    return $http({
+      method: "GET",
+      url: "/api/note?_id=" + id,
+    }).then(function(note) {
+      return note.data[0];
+    });
+  };
+}]);
+
+angular.module("notes").service("booksService", ["$http", function($http) {
+  this.createBook = function(book) {
+    console.log(book);
+    return $http({
+      method: "POST",
+      url: "/api/book",
+      data: book
+    }).then(function(result) {
+      console.log("book created");
+    });
+  };
+
+  this.getBooks = function() {
+    return $http({
+      method: "GET",
+      url: "/api/book",
+    }).then(function(books) {
+      return books.data;
+    });
+  };
+
+  this.getBook = function(id) {
+    console.log(book);
+    return $http({
+      method: "GET",
+      url: "/api/book?_id=" + id,
+    }).then(function(book) {
+      return book.data[0];
+    });
+  };
+
+}]);
 
 angular.module("notes").service("menuService", ["$http", function ($http) {
   this.logout =  function () {
@@ -28500,14 +28594,13 @@ angular.module("notes").service("menuService", ["$http", function ($http) {
 
 angular.module("notes").service("editorService", ["$http", "$state", function ($http, $state) {
   this.createNote = function (note){
-    console.log(note);
     return $http({
       method: "POST",
       url: "/api/note",
       data: note
     }).then(function (result) {
       console.log("note created");
-      
+
     });
   };
 }]);
@@ -28530,18 +28623,16 @@ angular.module("notes").service("noteService", ["$http", function ($http) {
     return $http({
       method: "GET",
       url: "/api/note",
-      data: note
     }).then(function (result) {
       console.log("note created");
     });
   };
-  this.Note = function (note){
+  this.getNote = function (id){
     return $http({
-      method: "DELETE",
-      url: "/api/note",
-      data: note
+      method: "GET",
+      url: "/api/note?_id=" + id,
     }).then(function (result) {
-      console.log("note created");
+      return result.data[0];
     });
   };
 

@@ -29,10 +29,11 @@ angular.module("notes").config(function ($stateProvider, $urlRouterProvider) {
     })
     .state("books", {
       url: "/books",
-      templateUrl: "../views/routeViews/books/books.html"
+      templateUrl: "../views/routeViews/books/books.html",
+      controller: "booksCtrl"
     })
     .state("book", {
-      url: "/book",
+      url: "/book/:id",
       templateUrl: "../views/routeViews/book/book.html",
       controller: "bookCtrl"
     })

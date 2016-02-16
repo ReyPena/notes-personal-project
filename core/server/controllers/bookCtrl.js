@@ -2,8 +2,7 @@ var book = require("../models/booksModel");
 
 module.exports = {
   createBook: function (req, res, next) {
-    console.log("here created", req.body);
-    new User( req.body ).save(function( err, book ) {
+    new book( req.body ).save(function( err, book ) {
 			if (err) {
 				res.status(500).send( err );
 			} else {
@@ -12,11 +11,11 @@ module.exports = {
 		});
   },
   getBook: function (req, res, next) {
-    book.findById(req.params.id).then(function (err, book) {
+    book.find(req.query).exec(function (err, book) {
       if(err){
         return res.status(500).send(err);
       }
-      res.send(book);
+      res.status(200).send(book);
     });
   },
   deleteBook: function( req, res ) {

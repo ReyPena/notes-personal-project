@@ -2,7 +2,6 @@ var note = require("../models/notesModel");
 
 module.exports = {
   createNote: function (req, res, next) {
-    console.log("here created", req.body);
     new note( req.body ).save(function( err, note ) {
 			if (err) {
 				res.status(500).send( err );
@@ -12,11 +11,11 @@ module.exports = {
 		});
   },
   getNote: function (req, res, next) {
-    note.findById(req.params.id).then(function (err, note) {
+    note.find(req.query).exec(function (err, note) {
       if(err){
         return res.status(500).send(err);
       }
-      res.send(note);
+      res.status(200).send(note);
     });
   },
   deleteNote: function( req, res ) {

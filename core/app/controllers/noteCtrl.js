@@ -1,3 +1,6 @@
 angular.module("notes").controller("noteCtrl", function ($scope, $stateParams, noteService) {
-  $stateParams.id
+  noteService.getNote($stateParams.id).then(function (response) {
+      $scope.note = response;
+    }
+  );
 });

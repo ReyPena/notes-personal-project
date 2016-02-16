@@ -5,6 +5,7 @@ var Books = new mongoose.Schema({
   bookDescription: {type: String},
   bookTopic: {type: String},
   bookDate: {type: Date, default: Date.now},
+  author: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   noteIds: [{type: mongoose.Schema.Types.ObjectId, ref: 'Note'}]
 });
 

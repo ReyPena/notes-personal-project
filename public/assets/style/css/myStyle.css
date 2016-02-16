@@ -19,5 +19,7 @@
 .whiteText{
   color: #ffffff;
 }
-
+.dedito{
+  cursor: pointer;
+}
 /*.darkBlueContainer {}*/

@@ -1,6 +1,20 @@
-angular.module("notes").controller("booksCtrl", function ($scope) {
-  
+angular.module("notes").controller("booksCtrl", function ($scope, booksService) {
+
   $scope.deleteBook = function($index) {
-    $scope.editors.splice($index, 1);
+
   };
+
+  $scope.getAllBooks = function () {
+    booksService.getBooks().then(function (response) {
+      $scope.books = response;
+    });
+  };
+
+  $scope.saveBook = function (book) {
+    booksService.createBook(book);
+    $scope.getAllBooks();
+  };
+
+  $scope.getAllBooks();
+
 });
