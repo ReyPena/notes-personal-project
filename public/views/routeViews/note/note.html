@@ -1,10 +1,12 @@
 <div class="container">
   <div class="panel panel-default">
     <div class="panel-heading">{{note.noteName}}</div>
-    <div class="panel-body">
-      {{note.content}}
-      {{note.date}}
+    <div class="panel-body" ng-repeat="conten in note.content">
+      <div ng-bind-html="conten.text" ng-if="conten.language=='text'"></div>
+      <textarea ui-codemirror="{theme: 'seti', lineNumbers: true, readOnly: 'nocursor', mode: conten.language}" ng-if="conten.language!='text'" ng-model="conten.text"></textarea>
+      <!-- <summernote config="textEdit"></summernote> -->
     </div>
+    <span>{{note.noteDate}}</span>
     <div class="panel-footer text-right">
       <a href="/#/book" class="btn btn-default">Close</a>
       <a href="/#/editor" class="btn btn-primary">Edit</a>

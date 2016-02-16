@@ -1,4 +1,4 @@
-angular.module("notes").config(function ($stateProvider, $urlRouterProvider) {
+angular.module("notes").config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state("home", {
       url: "/home",
@@ -17,35 +17,71 @@ angular.module("notes").config(function ($stateProvider, $urlRouterProvider) {
     .state("profile", {
       url: "/profile",
       templateUrl: "../views/routeViews/profile/profile.html",
-      // resolve: {
-      //   token: function (tokenFactory, $state) {
-      //     var token = tokenFactory.getToken();
-      //     console.log(token);
-      //     if (!token) {
-      //       $state.go("home");
-      //     }
-      //   }
-      // }
+      resolve: {
+        token: function(tokenFactory, $state) {
+          var token = tokenFactory.getToken();
+          console.log(token);
+          if (!token) {
+            $state.go("/#/home");
+          }
+        }
+      }
     })
     .state("books", {
       url: "/books",
       templateUrl: "../views/routeViews/books/books.html",
-      controller: "booksCtrl"
+      controller: "booksCtrl",
+      resolve: {
+        token: function(tokenFactory, $state) {
+          var token = tokenFactory.getToken();
+          console.log(token);
+          if (!token) {
+            $state.go("/#/home");
+          }
+        }
+      }
     })
     .state("book", {
       url: "/book/:id",
       templateUrl: "../views/routeViews/book/book.html",
-      controller: "bookCtrl"
+      controller: "bookCtrl",
+      resolve: {
+        token: function(tokenFactory, $state) {
+          var token = tokenFactory.getToken();
+          console.log(token);
+          if (!token) {
+            $state.go("/#/home");
+          }
+        }
+      }
     })
     .state("note", {
       url: "/note/:id",
       templateUrl: "../views/routeViews/note/note.html",
-      controller: "noteCtrl"
+      controller: "noteCtrl",
+      resolve: {
+        token: function(tokenFactory, $state) {
+          var token = tokenFactory.getToken();
+          console.log(token);
+          if (!token) {
+            $state.go("/#/home");
+          }
+        }
+      }
     })
     .state("editor", {
       url: "/editor",
       templateUrl: "../views/routeViews/editor/editor.html",
-      controller: "editorCtrl"
+      controller: "editorCtrl",
+      resolve: {
+        token: function(tokenFactory, $state) {
+          var token = tokenFactory.getToken();
+          console.log(token);
+          if (!token) {
+            $state.go("/#/home");
+          }
+        }
+      }
     });
 
   $urlRouterProvider

@@ -16,7 +16,6 @@ passport.use(new LocalStrategy({
       return done(null, false);
     }
     if(user.verifyPassword(password)){
-
       // res.json({
       //     success: true,
       //     message: 'Enjoy your token!',

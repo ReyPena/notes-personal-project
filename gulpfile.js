@@ -18,6 +18,7 @@ var paths = {
     "./bower_components/jquery/dist/jquery.js",
     "./bower_components/angular/angular.min.js",
     "./bower_components/angular-ui-router/release/angular-ui-router.min.js",
+    "./bower_components/angular-sanitize/angular-sanitize.min.js",
     // this is for css libs and such
     "./bower_components/codemirror/lib/codemirror.js",
     "./bower_components/codemirror/mode/xml/xml.js",

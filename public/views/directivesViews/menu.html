@@ -15,19 +15,19 @@
     <div aria-expanded="false" class="navbar-collapse collapse" id="mobilnav">
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a href="/#/profile" ng-hide="notlog">profile</a>
+          <a href="/#/profile" ng-if="loggin">profile</a>
         </li>
         <li>
-          <a href="/#/books" ng-hide="notlog">Notebooks</a>
+          <a href="/#/books" ng-if="loggin">Notebooks</a>
         </li>
         <li>
-          <a href="/#/register">Register</a>
+          <a href="/#/register" ng-if="!loggin">Register</a>
         </li>
         <li>
-          <a href="/#/login">Log-in</a>
+          <a href="/#/login" ng-if="!loggin">Log-in</a>
         </li>
         <li>
-          <a href="#" ng-click="logout()">
+          <a href="#" ng-click="logout()" ng-if="loggin">
             <i class="zmdi zmdi-run zmdi-hc-2x"></i>
           </a>
         </li>

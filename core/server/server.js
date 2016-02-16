@@ -1,5 +1,6 @@
 var express = require("express")
   , session = require("express-session")
+  , sessionJwt = require("express-jwt")
   , cors = require("cors")
   , bodyParser = require("body-parser")
   , mongoose = require("mongoose")
@@ -17,6 +18,7 @@ var localAuthCtrl = require("./controllers/localAuthCtrl")
 
 app.use(express.static("./public"));
 app.use(session({secret: "nySecret", saveUninitialized: true, resave: true}));
+// app.use(sessionJwt({secret: "JwtSecret"}).unless({path: ["/#/login", "/#/home", "/#/register"]}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json());
@@ -35,8 +37,11 @@ app.get("/auth/logout", localAuthCtrl.logout);
 ///////////////
 //User/////////
 ///////////////
-app.post("/api/user", userCtrl.createUser);
+app.post("/api/user", userCtrl.createUser, passport.authenticate("local", {
+  successRedirect: '/api/user'
+} ));
 app.get("/api/user/", userCtrl.getUser);
+app.get("/api/logged", userCtrl.isLogged);
 app.put("/api/user", userCtrl.updateUser);
 app.delete("/api/user", userCtrl.deleteUser);
 

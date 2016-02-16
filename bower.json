@@ -19,6 +19,7 @@
     "angular-ui-router": "~0.2.17",
     "codemirror": "~5.11.0",
     "angular-summernote": "~0.7.1",
-    "angular-ui-codemirror": "~0.3.0"
+    "angular-ui-codemirror": "~0.3.0",
+    "angular-sanitize": "~1.4.9"
   }
 }
