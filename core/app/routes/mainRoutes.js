@@ -20,7 +20,6 @@ angular.module("notes").config(function($stateProvider, $urlRouterProvider) {
       resolve: {
         token: function(tokenFactory, $state) {
           var token = tokenFactory.getToken();
-          console.log(token);
           if (!token) {
             $state.go("/#/home");
           }
@@ -34,7 +33,6 @@ angular.module("notes").config(function($stateProvider, $urlRouterProvider) {
       resolve: {
         token: function(tokenFactory, $state) {
           var token = tokenFactory.getToken();
-          console.log(token);
           if (!token) {
             $state.go("/#/home");
           }
@@ -48,7 +46,6 @@ angular.module("notes").config(function($stateProvider, $urlRouterProvider) {
       resolve: {
         token: function(tokenFactory, $state) {
           var token = tokenFactory.getToken();
-          console.log(token);
           if (!token) {
             $state.go("/#/home");
           }
@@ -62,7 +59,6 @@ angular.module("notes").config(function($stateProvider, $urlRouterProvider) {
       resolve: {
         token: function(tokenFactory, $state) {
           var token = tokenFactory.getToken();
-          console.log(token);
           if (!token) {
             $state.go("/#/home");
           }
@@ -76,7 +72,6 @@ angular.module("notes").config(function($stateProvider, $urlRouterProvider) {
       resolve: {
         token: function(tokenFactory, $state) {
           var token = tokenFactory.getToken();
-          console.log(token);
           if (!token) {
             $state.go("/#/home");
           }

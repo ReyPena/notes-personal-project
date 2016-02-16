@@ -39,7 +39,7 @@ app.get("/auth/logout", localAuthCtrl.logout);
 ///////////////
 app.post("/api/user", userCtrl.createUser, passport.authenticate("local", {
   successRedirect: '/api/user'
-} ));
+}));
 app.get("/api/user/", userCtrl.getUser);
 app.get("/api/logged", userCtrl.isLogged);
 app.put("/api/user", userCtrl.updateUser);

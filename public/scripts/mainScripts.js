@@ -28311,16 +28311,22 @@ angular.module("notes").controller("booksCtrl", ["$scope", "booksService", funct
 
 }]);
 
-angular.module("notes").controller("menuCtrl", ["$scope", "menuService", "tokenFactory", function ($scope, menuService, tokenFactory) {
-  $scope.loggin = false;
-
-  menuService.isLogged().then(function (result) {
-    if (result === true) {
-      $scope.loggin = true;
-    } else {
-      $scope.loggin = false;
+angular.module("notes").controller("menuCtrl", ["$scope", "$rootScope", "menuService", "tokenFactory", function ($scope, $rootScope, menuService, tokenFactory) {
+  $rootScope.$on('$stateChangeStart',function (event, toState, toParams) {
+    if(toState.name != 'login' && toState.name != 'register'){
+      menuService.isLogged().then(function (result) {
+        if (result === true) {
+          $scope.loggin = true;
+        } else {
+          $scope.loggin = false;
+        }
+      });
     }
   });
+
+  $scope.loggin = false;
+
+
 
   $scope.logout = function () {
     tokenFactory.clearToken();
@@ -28525,7 +28531,6 @@ angular.module("notes").config(["$stateProvider", "$urlRouterProvider", function
       resolve: {
         token: ["tokenFactory", "$state", function(tokenFactory, $state) {
           var token = tokenFactory.getToken();
-          console.log(token);
           if (!token) {
             $state.go("/#/home");
           }
@@ -28539,7 +28544,6 @@ angular.module("notes").config(["$stateProvider", "$urlRouterProvider", function
       resolve: {
         token: ["tokenFactory", "$state", function(tokenFactory, $state) {
           var token = tokenFactory.getToken();
-          console.log(token);
           if (!token) {
             $state.go("/#/home");
           }
@@ -28553,7 +28557,6 @@ angular.module("notes").config(["$stateProvider", "$urlRouterProvider", function
       resolve: {
         token: ["tokenFactory", "$state", function(tokenFactory, $state) {
           var token = tokenFactory.getToken();
-          console.log(token);
           if (!token) {
             $state.go("/#/home");
           }
@@ -28567,7 +28570,6 @@ angular.module("notes").config(["$stateProvider", "$urlRouterProvider", function
       resolve: {
         token: ["tokenFactory", "$state", function(tokenFactory, $state) {
           var token = tokenFactory.getToken();
-          console.log(token);
           if (!token) {
             $state.go("/#/home");
           }
@@ -28581,7 +28583,6 @@ angular.module("notes").config(["$stateProvider", "$urlRouterProvider", function
       resolve: {
         token: ["tokenFactory", "$state", function(tokenFactory, $state) {
           var token = tokenFactory.getToken();
-          console.log(token);
           if (!token) {
             $state.go("/#/home");
           }
@@ -28656,7 +28657,7 @@ angular.module("notes").service("booksService", ["$http", function($http) {
 
 }]);
 
-angular.module("notes").service("menuService", ["$http", function ($http) {
+angular.module("notes").service("menuService", ["$http", "$state", function ($http, $state) {
 
   this.isLogged =  function () {
     return $http({
@@ -28672,7 +28673,7 @@ angular.module("notes").service("menuService", ["$http", function ($http) {
       method: "GET",
       url: "/auth/logout"
     }).then(function (result) {
-      console.log("logout");
+      $state.go("home");
     });
   };
 }]);

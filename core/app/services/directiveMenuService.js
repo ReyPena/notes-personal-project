@@ -1,4 +1,4 @@
-angular.module("notes").service("menuService", function ($http) {
+angular.module("notes").service("menuService", function ($http, $state) {
 
   this.isLogged =  function () {
     return $http({
@@ -14,7 +14,7 @@ angular.module("notes").service("menuService", function ($http) {
       method: "GET",
       url: "/auth/logout"
     }).then(function (result) {
-      console.log("logout");
+      $state.go("home");
     });
   };
 });
