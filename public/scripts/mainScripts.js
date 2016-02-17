@@ -28312,6 +28312,7 @@ angular.module("notes").controller("booksCtrl", ["$scope", "booksService", funct
 }]);
 
 angular.module("notes").controller("menuCtrl", ["$scope", "$rootScope", "menuService", "tokenFactory", function ($scope, $rootScope, menuService, tokenFactory) {
+
   $rootScope.$on('$stateChangeStart',function (event, toState, toParams) {
     if(toState.name != 'login' && toState.name != 'register'){
       menuService.isLogged().then(function (result) {
@@ -28334,7 +28335,7 @@ angular.module("notes").controller("menuCtrl", ["$scope", "$rootScope", "menuSer
   };
 }]);
 
-angular.module("notes").controller("editorCtrl", ["$scope", "editorService", function($scope, editorService) {
+angular.module("notes").controller("editorCtrl", ["$scope", "$state", "editorService", function($scope, $state, editorService) {
   var codeTheme = "seti";
 
   $scope.textEdit = {
@@ -28400,6 +28401,7 @@ angular.module("notes").controller("editorCtrl", ["$scope", "editorService", fun
   // here is the wire to the server
   $scope.saveNote = function (note) {
     editorService.createNote(note);
+    $state.go("books");
   };
 
 }]);

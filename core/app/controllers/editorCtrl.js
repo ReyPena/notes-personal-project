@@ -1,4 +1,4 @@
-angular.module("notes").controller("editorCtrl", function($scope, editorService) {
+angular.module("notes").controller("editorCtrl", function($scope, $state, editorService) {
   var codeTheme = "seti";
 
   $scope.textEdit = {
@@ -64,6 +64,7 @@ angular.module("notes").controller("editorCtrl", function($scope, editorService)
   // here is the wire to the server
   $scope.saveNote = function (note) {
     editorService.createNote(note);
+    $state.go("books");
   };
 
 });

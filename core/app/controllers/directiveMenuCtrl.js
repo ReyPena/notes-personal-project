@@ -1,4 +1,5 @@
 angular.module("notes").controller("menuCtrl", function ($scope, $rootScope, menuService, tokenFactory) {
+
   $rootScope.$on('$stateChangeStart',function (event, toState, toParams) {
     if(toState.name != 'login' && toState.name != 'register'){
       menuService.isLogged().then(function (result) {
