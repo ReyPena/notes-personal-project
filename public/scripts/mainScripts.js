@@ -28445,72 +28445,6 @@ angular.module("notes").controller("registerCtrl", ["$scope", "registerService",
   };
 }]);
 
-angular.module("notes").directive("codeEditDirective", function() {
-  return {
-    restrict: "AE",
-    template: '<textarea ng-model="ngModel" ui-codemirror="codeEdit"></textarea><br>',
-    scope: {
-      language: "=",
-      ngModel: "="
-    },
-    controller: ["$scope", function($scope) {
-
-      $scope.codeEdit = {
-        theme: "seti",
-        lineNumbers: true,
-        mode: $scope.language
-      };
-
-      // $scope.themeSeti = function() {
-      //   var codeTheme = "seti";
-      // };
-      // $scope.themeMonokai = function() {
-      //   var codeTheme = "monokai";
-      // };
-      // $scope.themeRubyblue = function() {
-      //   var codeTheme = "rubyblue";
-      // };
-
-    }]
-  };
-});
-
-
-angular.module("notes").directive("menuDirective", function () {
-  return {
-    restrict: "E",
-    templateUrl:"../views/directivesViews/menu.html",
-    controller: "menuCtrl"
-  };
-});
-
-angular.module("notes").directive("textEditDirective", function() {
-  return {
-    restrict: "E",
-    template: '<summernote config="textEdit" ng-model="ngModel"></summernote>',
-    scope: {
-      ngModel: "="
-    },
-    controller: ["$scope", function($scope) {
-      $scope.textEdit = {
-        height: 300,
-        toolbar: [
-          ['edit', ['undo', 'redo']],
-          ['headline', ['style']],
-          ['style', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'strikethrough', 'clear']],
-          ['fontface', ['fontname']],
-          ['textsize', ['fontsize']],
-          ['fontclr', ['color']],
-          ['alignment', ['ul', 'ol', 'paragraph', 'lineheight']],
-          ['height', ['height']],
-          ['table', ['table']],
-          ['insert', ['link', 'hr']]
-        ]
-      };
-    }]
-  };
-});
-
 angular.module("notes").config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state("home", {
@@ -28595,6 +28529,72 @@ angular.module("notes").config(["$stateProvider", "$urlRouterProvider", function
   $urlRouterProvider
     .otherwise("/home");
 }]);
+
+angular.module("notes").directive("codeEditDirective", function() {
+  return {
+    restrict: "AE",
+    template: '<textarea ng-model="ngModel" ui-codemirror="codeEdit"></textarea><br>',
+    scope: {
+      language: "=",
+      ngModel: "="
+    },
+    controller: ["$scope", function($scope) {
+
+      $scope.codeEdit = {
+        theme: "seti",
+        lineNumbers: true,
+        mode: $scope.language
+      };
+
+      // $scope.themeSeti = function() {
+      //   var codeTheme = "seti";
+      // };
+      // $scope.themeMonokai = function() {
+      //   var codeTheme = "monokai";
+      // };
+      // $scope.themeRubyblue = function() {
+      //   var codeTheme = "rubyblue";
+      // };
+
+    }]
+  };
+});
+
+
+angular.module("notes").directive("menuDirective", function () {
+  return {
+    restrict: "E",
+    templateUrl:"../views/directivesViews/menu.html",
+    controller: "menuCtrl"
+  };
+});
+
+angular.module("notes").directive("textEditDirective", function() {
+  return {
+    restrict: "E",
+    template: '<summernote config="textEdit" ng-model="ngModel"></summernote>',
+    scope: {
+      ngModel: "="
+    },
+    controller: ["$scope", function($scope) {
+      $scope.textEdit = {
+        height: 300,
+        toolbar: [
+          ['edit', ['undo', 'redo']],
+          ['headline', ['style']],
+          ['style', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'strikethrough', 'clear']],
+          ['fontface', ['fontname']],
+          ['textsize', ['fontsize']],
+          ['fontclr', ['color']],
+          ['alignment', ['ul', 'ol', 'paragraph', 'lineheight']],
+          ['height', ['height']],
+          ['table', ['table']],
+          ['insert', ['link', 'hr']]
+        ]
+      };
+    }]
+  };
+});
 
 angular.module("notes").service("bookService", ["$http", function ($http) {
 

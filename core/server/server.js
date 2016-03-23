@@ -4,20 +4,21 @@ var express = require("express")
   , cors = require("cors")
   , bodyParser = require("body-parser")
   , mongoose = require("mongoose")
-  , mongoUri = "mongodb://localhost:27017/notes"
+  , mongoUri = config.mongoUri
   , app = express()
   , passport = require("./service/passport")
-  , port = process.env.PORT || 8080;
+  , port = config.port;
 
 // this are the controlleres files
 
-var localAuthCtrl = require("./controllers/localAuthCtrl")
+var config = require("./config")
+  , localAuthCtrl = require("./controllers/localAuthCtrl")
   , userCtrl = require("./controllers/userCtrl")
   , bookCtrl = require("./controllers/bookCtrl")
   , noteCtrl = require("./controllers/noteCtrl");
 
 app.use(express.static("./public"));
-app.use(session({secret: "nySecret", saveUninitialized: true, resave: true}));
+app.use(session({secret: config.secret, saveUninitialized: true, resave: true}));
 // app.use(sessionJwt({secret: "JwtSecret"}).unless({path: ["/#/login", "/#/home", "/#/register"]}));
 app.use(passport.initialize());
 app.use(passport.session());
