@@ -12,7 +12,8 @@ var config = require("./config")
 
 // this are the controlleres files
 
-var localAuthCtrl = require("./controllers/localAuthCtrl")
+var config = require("./config")
+  , localAuthCtrl = require("./controllers/localAuthCtrl")
   , userCtrl = require("./controllers/userCtrl")
   , bookCtrl = require("./controllers/bookCtrl")
   , noteCtrl = require("./controllers/noteCtrl");
