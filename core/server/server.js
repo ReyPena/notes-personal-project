@@ -18,7 +18,7 @@ var config = require("./config")
   , bookCtrl = require("./controllers/bookCtrl")
   , noteCtrl = require("./controllers/noteCtrl");
 
-app.use(express.static("./public"));
+app.use(express.static(__dirname + "./../../public"));
 app.use(session({secret: config.SECRET, saveUninitialized: true, resave: true}));
 // app.use(sessionJwt({secret: "JwtSecret"}).unless({path: ["/#/login", "/#/home", "/#/register"]}));
 app.use(passport.initialize());
