@@ -1,13 +1,14 @@
-var express = require("express")
+var config = require("./config")
+  , express = require("express")
   , session = require("express-session")
   , sessionJwt = require("express-jwt")
-  , cors = require("cors")
+  // , cors = require("cors")
   , bodyParser = require("body-parser")
   , mongoose = require("mongoose")
-  , mongoUri = "mongodb://localhost:27017/notes"
+  , mongoUri = config.MONGO_URI
   , app = express()
   , passport = require("./service/passport")
-  , port = process.env.PORT || 8080;
+  , port = config.PORT;
 
 // this are the controlleres files
 
@@ -17,12 +18,12 @@ var localAuthCtrl = require("./controllers/localAuthCtrl")
   , noteCtrl = require("./controllers/noteCtrl");
 
 app.use(express.static("./public"));
-app.use(session({secret: "nySecret", saveUninitialized: true, resave: true}));
+app.use(session({secret: config.SECRET, saveUninitialized: true, resave: true}));
 // app.use(sessionJwt({secret: "JwtSecret"}).unless({path: ["/#/login", "/#/home", "/#/register"]}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json());
-app.use(cors());
+// app.use(cors());
 
 ///////////////
 //Local Auth///
@@ -60,11 +61,6 @@ app.post("/api/note", noteCtrl.createNote);
 app.get("/api/note", noteCtrl.getNote);
 app.put("/api/note", noteCtrl.updateNote);
 app.delete("/api/note", noteCtrl.deleteNote);
-
-
-
-
-
 
 mongoose.connect(mongoUri);
 mongoose.connection.once("open", function () {
