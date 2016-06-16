@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-sm-3">
+    <div class="well bs-sidebar affix" id="sidebar">
+      <ul class="nav nav-pills nav-stacked">
+        <li>
+          <a data-toggle="collapse" data-target="#snippetType">
+            <span class="label label-primary"><i class="zmdi zmdi-code"></i></span> Add Snippet</a>
+        </li>
+        <ul class="collapse" id="snippetType">
+          <li><a ng-click="addNewHtml()">HTML</a></li>
+          <li><a ng-click="addNewCss()">CSS</a></li>
+          <li><a ng-click="addNewJS()">JS</a></li>
+        </ul>
+        <li>
+          <a ng-click="addNewText()">
+            <span class="label label-primary"><i class="zmdi zmdi-edit"></i></span> Add Text</a>
+        </li>
+        <li>
+          <a data-toggle="collapse" data-target="#themeMenu">
+            <span class="label label-primary"><i class="zmdi zmdi-sun"></i></span> Theme
+            <ul class="collapse" id="themeMenu">
+              <li><a ng-click="themeSeti()">Seti</a></li>
+              <li><a ng-click="themeMonokai()">Monokai</a></li>
+              <li><a ng-click="themeRubyblue()">Ruby-Blue</a></li>
+            </ul>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!--well bs-sidebar affix-->
+  </div>
+  <!--col-sm-3-->
+</div>
